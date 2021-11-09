@@ -1,29 +1,25 @@
-<a href="{{ url( '/virtual_licenses/' )}}">Regresar</a>
 <br>
+<div class="form-group">
+    <label for="name"> Nombres </label>
+    <input type="text" class="form-control" name="name" value="{{ isset($virtual_license->name)?$virtual_license->name:'' }}">
 
-<label for="name"> Nombres </label>
-<input type="text" name="name" value="{{ isset($virtual_license->name)?$virtual_license->name:'' }}">
-<br>
+    <label for="lastName"> Apellidos </label>
+    <input type="text" class="form-control" name="lastName" value="{{ isset($virtual_license->lastName)?$virtual_license->lastName:'' }}">
 
-<label for="lastName"> Apellidos </label>
-<input type="text" name="lastName" value="{{ isset($virtual_license->lastName)?$virtual_license->lastName:'' }}">
-<br>
+    <label for="document"> Documento de identidad </label>
+    <input type="integer" class="form-control" name="document" value="{{ isset($virtual_license->document)?$virtual_license->document:'' }}">
 
-<label for="document"> Documento de identidad </label>
-<input type="integer" name="document" value="{{ isset($virtual_license->document)?$virtual_license->document:'' }}">
-<br>
-
-<label for="program"> Programa de formación </label>
-<input type="text" name="program" value="{{ isset($virtual_license->program)?$virtual_license->program:'' }}">
-<br>
-
-<label for="photo"> Foto </label>
-@if(isset($virtual_license->photo))
-<div class="container-img">
-    <img src="{{ asset('storage').'/'.$virtual_license->photo }}" alt="">
+    <label for="program"> Programa de formación </label>
+    <input type="text" class="form-control" name="program" value="{{ isset($virtual_license->program)?$virtual_license->program:'' }}">
 </div>
-@endif
-<input type="file" name="photo">
-<br>
+<div class="form-group">
+    @if(isset($virtual_license->photo))
+    <div class="container-img">
+        <img class="img-thumbnail img-fluid" src="{{ asset('storage').'/'.$virtual_license->photo }}" width="100" alt="">
+    </div>
+    @endif
+    <input type="file" name="photo">
+</div>
+<input class="btn btn-success" type="submit" value="{{$action}}">
 
-<input type="submit" value="{{$action}}">
+<a href="{{ url( '/virtual_licenses/' )}}" class="btn btn-primary">Cancelar</a>

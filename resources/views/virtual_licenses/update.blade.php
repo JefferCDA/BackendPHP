@@ -1,3 +1,6 @@
+@extends('layouts.app')
+@section('content')
+<div class="container">
 <form action="{{ url( '/virtual_licenses/'.$virtual_license->id ) }}" method="post" enctype="multipart/form-data">
     @csrf
     {{ method_field('PATCH') }}
@@ -6,3 +9,5 @@
         @include('virtual_licenses.form',['action'=>'Actualizar'])
     </div>
 </form>
+</div>
+@endsection

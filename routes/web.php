@@ -24,11 +24,11 @@ Route::get('/', function () {
 
 // Route::get('virtual_licenses/create', [VirtualLicensesController::class, 'create']);
 
-Route::resource('virtual_licenses', VirtualLicensesController::class);
+Route::resource('virtual_licenses', VirtualLicensesController::class)->middleware('auth');
 
-Auth::routes();
+Auth::routes(['register'=> false, 'reset' =>false]);
 
-Route::get('/home', [VirtualLicensesController::class, 'index'])->name('home');
+Route::get('/home', [VirtualLicensesController::class, 'index'])->name('home')->middleware('auth');
 Route::group(['middleware' => 'auth'], function (){
     Route::get('/', [VirtualLicensesController::class, 'index'])->name('home');
 });

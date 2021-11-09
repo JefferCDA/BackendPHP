@@ -41,6 +41,13 @@ class VirtualLicensesController extends Controller
     public function store(Request $request)
     {
         //
+        $items = [
+            'name' => 'required|string|max:150',
+            'lastName' => 'required|string|max:150',
+            'document' => 'required|integer|max:15',
+            'program' => 'required|string|max:50',
+            'photo' => 'required|string|max:250',
+        ];
         $licensesData = request()->except('_token');
 
         if ($request->hasFile('photo')) {
@@ -49,7 +56,7 @@ class VirtualLicensesController extends Controller
 
         VirtualLicenses::insert($licensesData);
 
-        return redirect('virtual_licenses')-> with('message', 'Create virtual license success');
+        return redirect('virtual_licenses')->with('message', 'Create virtual license success');
     }
 
     /**

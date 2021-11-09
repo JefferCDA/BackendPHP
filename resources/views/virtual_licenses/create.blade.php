@@ -1,3 +1,6 @@
+@extends('layouts.app')
+@section('content')
+<div class="container">
 <form action="{{url('virtual_licenses')}}" method="post" enctype="multipart/form-data">
     @csrf
 
@@ -6,3 +9,5 @@
     @include('virtual_licenses.form',['action'=>'Guardar'])
     </div>
 </form>
+</div>
+@endsection
