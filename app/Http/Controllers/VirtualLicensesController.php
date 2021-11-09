@@ -44,10 +44,14 @@ class VirtualLicensesController extends Controller
         $items = [
             'name' => 'required|string|max:150',
             'lastName' => 'required|string|max:150',
-            'document' => 'required|integer|max:15',
+            'document' => 'required|integer',
             'program' => 'required|string|max:50',
-            'photo' => 'required|string|max:250',
+            'photo' => 'required|max:10000|mimes:jpeg,png,jpg',
         ];
+        $message = [
+            'required' => ':attribute is required'
+        ];
+        $this->validate($request, $items, $message);
         $licensesData = request()->except('_token');
 
         if ($request->hasFile('photo')) {
@@ -93,12 +97,27 @@ class VirtualLicensesController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $items = [
+            'name' => 'required|string|max:150',
+            'lastName' => 'required|string|max:150',
+            'document' => 'required|integer',
+            'program' => 'required|string|max:50',
+        ];
+        if ($request->hasFile('photo')) {
+            $items = ['photo' => 'required|max:10000|mimes:jpeg,png,jpg',];
+        }
+        $message = [
+            'required' => ':attribute is required'
+        ];
+        $this->validate($request, $items, $message);
         $licensesData = request()->except(['_token', '_method']);
+
         if ($request->hasFile('photo')) {
             $virtual_license = VirtualLicenses::findOrFail($id);
             Storage::delete('public/' . $virtual_license->photo);
             $licensesData['photo'] = $request->file('photo')->store('uploads', 'public');
         }
+
         VirtualLicenses::where('id', '=', $id)->update($licensesData);
         return view('virtual_licenses.update', compact('virtual_license'));
     }

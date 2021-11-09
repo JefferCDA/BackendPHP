@@ -4,8 +4,8 @@
 <div class="container">
 
     <div class="d-inline">
-        <a href="{{ url( '/virtual_licenses/create' )}}" class="btn btn-success">Crear Carnet</a>
-        <a href="{{ url( '/virtual_licenses/create' )}}" class="btn btn-primary">Escanear QR</a>
+        <a href="{{ url( '/virtual_licenses/create' )}}" class="btn btn-success">Crear Estudiante</a>
+        <a href="{{ url( '/virtual_licenses/' )}}" class="btn btn-primary">Generar Carnet Virtual</a>
     </div>
 
 
